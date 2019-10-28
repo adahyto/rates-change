@@ -1,0 +1,45 @@
+<mat-card class="std-margin-top-center width-md">
+  <form [formGroup]="ratesForm" class="flex-column">
+    <mat-form-field>
+      <input
+        matInput
+        formControlName="amount"
+        placeholder="Amount"
+        (input)="run()"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select
+        formControlName="base"
+        placeholder="From"
+        (selectionChange)="run()"
+      >
+        <mat-option *ngFor="let base of available" [value]="base">
+          {{ base }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select
+        formControlName="symbol"
+        placeholder="To"
+        (selectionChange)="run()"
+      >
+        <mat-option *ngFor="let symbol of available" [value]="symbol">
+          {{ symbol }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+  <p>
+    Converted:
+    <span>
+      {{ converted ? converted.converted : 0 + " " + ratesForm.value.symbol }}
+    </span>
+  </p>
+  <mat-card-actions class="card_actions">
+    <button mat-button (click)="dispatch()">
+      Save
+    </button>
+  </mat-card-actions>
+</mat-card>

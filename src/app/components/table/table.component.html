@@ -1,0 +1,17 @@
+<mat-card *ngIf="elements.length > 0" class="std-margin-top-center width-md">
+  <table class="table width-max txt-center">
+    <thead>
+      <tr>
+        <th *ngFor="let name of displayedColumns" class="padding-sm">
+          {{ name | titlecase }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let el of elements">
+        <td class="padding-sm">{{ el.base }}</td>
+        <td class="padding-sm">{{ el.converted }}</td>
+      </tr>
+    </tbody>
+  </table>
+</mat-card>
