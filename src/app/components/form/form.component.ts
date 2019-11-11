@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { RateApiService } from "src/app/rate-api.service";
+import { RateApiService } from "src/app/services/rate-api.service";
 
 export interface FormRes {
   base: string;
@@ -13,7 +13,8 @@ export interface FormRes {
   styleUrls: ["./form.component.scss"]
 })
 export class FormComponent {
-  @Output() calcValue = new EventEmitter<any>();
+  // changed this
+  @Output() calcValue = new EventEmitter<FormRes>();
   ratesForm: FormGroup;
   available = [
     "CZK",
@@ -35,7 +36,12 @@ export class FormComponent {
     this.ratesForm = this.fb.group({
       amount: [
         0.0,
-        [Validators.min(0), Validators.minLength(0), Validators.required]
+        [
+          Validators.min(0),
+          Validators.minLength(0),
+          Validators.required
+          /* , Validators.pattern("(^\d+(?:\.\d{0,10})$|\d)") */
+        ]
       ],
       base: this.default.base,
       symbol: this.default.symbol

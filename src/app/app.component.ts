@@ -7,7 +7,7 @@ import { Component } from "@angular/core";
 })
 export class AppComponent {
   title = "rates";
-  saved = [];
+  saved: number[] = [];
 
   onSave(value: number) {
     this.saved.push(value);
