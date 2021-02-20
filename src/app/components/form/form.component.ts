@@ -10,41 +10,47 @@ export interface FormRes {
 @Component({
   selector: "app-form",
   templateUrl: "./form.component.html",
-  styleUrls: ["./form.component.scss"]
+  styleUrls: ["./form.component.scss"],
 })
 export class FormComponent {
   // changed this
   @Output() calcValue = new EventEmitter<FormRes>();
   ratesForm: FormGroup;
   available = [
-    "CZK",
-    "PLN",
-    "USD",
-    "GBP",
-    "CHF",
-    "SEK",
-    "RON",
-    "HUF",
     "AUD",
+    "BRL",
+    "CAD",
+    "CHF",
+    "CZK",
+    "DKK",
+    "EUR",
+    "GBP",
+    "HKD",
+    "HUF",
+    "NZD",
+    "IDR",
+    "INR",
+    "ILS",
     "JPY",
-    "DKK"
+    "NOK",
+    "PLN",
+    "RON",
+    "SEK",
+    "USD",
+    "SGD",
+    "ZAR",
   ];
-  default = { base: "CZK", symbol: "USD" };
+  default = { base: "CZK", symbol: "EUR" };
   converted: FormRes;
 
   constructor(private fb: FormBuilder, private ratesApi: RateApiService) {
     this.ratesForm = this.fb.group({
       amount: [
         0.0,
-        [
-          Validators.min(0),
-          Validators.minLength(0),
-          Validators.required
-          /* , Validators.pattern("(^\d+(?:\.\d{0,10})$|\d)") */
-        ]
+        [Validators.min(0), Validators.minLength(0), Validators.required],
       ],
       base: this.default.base,
-      symbol: this.default.symbol
+      symbol: this.default.symbol,
     });
   }
 
@@ -61,10 +67,10 @@ export class FormComponent {
   }
 
   convert(amount: string, base: string, symbol: string) {
-    this.ratesApi.getRate(base, symbol).subscribe(res => {
+    this.ratesApi.getRate(base, symbol).subscribe((res) => {
       this.converted = {
         base: amount + " " + base,
-        converted: Number(amount) * res.rates[symbol] + " " + symbol
+        converted: Number(amount) * res.rates[symbol] + " " + symbol,
       };
     });
   }

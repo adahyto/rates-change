@@ -2,8 +2,6 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 
-import { NgxsModule } from '@ngxs/store';
-
 import { AppComponent } from "./app.component";
 import { FormComponent } from "./components/form/form.component";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
@@ -37,7 +35,6 @@ import { TableComponent } from "./components/table/table.component";
     ServiceWorkerModule.register("ngsw-worker.js", {
       enabled: environment.production
     }),
-    NgxsModule.forRoot([])
   ],
   providers: [],
   bootstrap: [AppComponent]
