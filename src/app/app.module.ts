@@ -34,7 +34,7 @@ import { TableComponent } from "./components/table/table.component";
     BrowserAnimationsModule,
     ServiceWorkerModule.register("ngsw-worker.js", {
       enabled: environment.production
-    }),
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
